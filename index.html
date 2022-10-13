@@ -13,13 +13,14 @@
      <div class="container">
         <nav>
             <img src="images\logo-color111.png">
-            <ul>
+            <ul id="sidemenu">
                 <li><a href="#header">Home </a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
-
+                <i class="fas fa-times" onclick="closemenu()"></i>
             </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Aspiring Web developer</p>
@@ -146,9 +147,9 @@
                 </div>
             </div>
             <div class="contact-right">
-                <form>
-                    <input type="tex" name="name" placeholder="Your Name" required>
-                    <input type="email" name="eamail"  placeholder="Your Email" required>
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="email"  placeholder="Your Email" required>
                     <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
                     <button type="button" class="btn">Submit</button>
                 </form>
@@ -181,5 +182,28 @@ function opentab(tabname){
 
 
 </script>
+<script>
+
+    var sidemeu=document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemeu.style.right="0"
+    }
+    function closemenu(){
+        sidemeu.style.right="-200px"
+    }
+</script>
+<!--Existing script for google form---->
+<script>
+    const scriptURL = '<https://script.google.com/macros/s/AKfycbxsn8_TAojN3aFN0u-zNkw7OQXxUEMT4lqEarkiifenaTPEhRxPD70XMol5B6Dklbnvog/exec>'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>
 </html>
